@@ -1,45 +1,29 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
 
 function App() {
+  const [message, setMessage] = useState("Hello");
+  const [reply, setReply] = useState("");
+
+  async function sendMessage() {
+    try {
+      const res = await fetch("https://your-backend.onrender.com/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+      setReply(data.reply);
+    } catch (err) {
+      setReply("Error: " + err.message);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          k-smith-bot-fe
-          Learn React
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-          k-smith-bot-fe
-        </a>
-      </header>
+    <div>
+      <textarea value={message} onChange={e => setMessage(e.target.value)} />
+      <button onClick={sendMessage}>Send</button>
+      <pre>{reply}</pre>
     </div>
   );
 }
