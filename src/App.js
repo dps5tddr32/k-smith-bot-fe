@@ -6,16 +6,16 @@ function App() {
   const [reply, setReply] = useState("");
   const [usedIds, setUsedIds] = useState([]);
 
-  // Load used IDs from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem("usedChunkIds");
-    if (stored) setUsedIds(JSON.parse(stored));
-  }, []);
+  // // Load used IDs from localStorage on mount
+  // useEffect(() => {
+  //   const stored = localStorage.getItem("usedChunkIds");
+  //   if (stored) setUsedIds(JSON.parse(stored));
+  // }, []);
 
-  // Save used IDs to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("usedChunkIds", JSON.stringify(usedIds));
-  }, [usedIds]);
+  // // Save used IDs to localStorage whenever it changes
+  // useEffect(() => {
+  //   localStorage.setItem("usedChunkIds", JSON.stringify(usedIds));
+  // }, [usedIds]);
 
   async function sendMessage() {
     try {
